@@ -1,9 +1,7 @@
 from typing import Any, Dict, List, Mapping, Optional, Tuple
 
 from pymongo.read_preferences import _ServerMode
-from pymongo.server import Server
 from pymongo.server_description import ServerDescription
-from pymongo.settings import TopologySettings
 
 TOPOLOGY_TYPE: Any
 SRV_POLLING_TOPOLOGIES: Any
@@ -16,7 +14,7 @@ class TopologyDescription:
         replica_set_name: Optional[str],
         max_set_version: Optional[int],
         max_election_id: Optional[int],
-        topology_settings: TopologySettings,
+        topology_settings: Any,
     ) -> None: ...
     def check_compatible(self) -> None: ...
     def has_server(self, address: Tuple[str, int]) -> bool: ...
@@ -36,7 +34,7 @@ class TopologyDescription:
     @property
     def logical_session_timeout_minutes(self): ...
     @property
-    def known_servers(self) -> List[Server]: ...
+    def known_servers(self) -> List[ServerDescription]: ...
     @property
     def has_known_servers(self): ...
     @property

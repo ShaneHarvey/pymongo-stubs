@@ -1,4 +1,4 @@
-from typing import Any, Dict, Mapping, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple, Union
 
 class InsertOne:
     def __init__(self, document: Mapping[str, Any]) -> None: ...
@@ -6,50 +6,50 @@ class InsertOne:
     def __ne__(self, other: Any) -> Any: ...
 
 class DeleteOne:
-    def __init__(self, filter: Any, collation: Optional[Any] = ..., hint: Optional[Any] = ...) -> None: ...
+    def __init__(self, filter: Mapping[str, Any], collation: Optional[Any] = ..., hint: Optional[Any] = ...) -> None: ...
     def __eq__(self, other: Any) -> Any: ...
     def __ne__(self, other: Any) -> Any: ...
 
 class DeleteMany:
-    def __init__(self, filter: Any, collation: Optional[Any] = ..., hint: Optional[Any] = ...) -> None: ...
+    def __init__(self, filter: Mapping[str, Any], collation: Optional[Any] = ..., hint: Optional[Any] = ...) -> None: ...
     def __eq__(self, other: Any) -> Any: ...
     def __ne__(self, other: Any) -> Any: ...
 
 class ReplaceOne:
     def __init__(
-        self, filter: Any, replacement: Any, upsert: bool = ..., collation: Optional[Any] = ..., hint: Optional[Any] = ...
+        self,
+        filter: Mapping[str, Any],
+        replacement: Mapping[str, Any],
+        upsert: bool = ...,
+        collation: Optional[Any] = ...,
+        hint: Optional[Any] = ...,
     ) -> None: ...
     def __eq__(self, other: Any) -> Any: ...
     def __ne__(self, other: Any) -> Any: ...
 
-class _UpdateOp:
-    def __init__(self, filter: Any, doc: Any, upsert: Any, collation: Any, array_filters: Any, hint: Any) -> None: ...
-    def __eq__(self, other: Any) -> Any: ...
-    def __ne__(self, other: Any) -> Any: ...
-
-class UpdateOne(_UpdateOp):
+class UpdateOne:
     def __init__(
         self,
-        filter: Any,
-        update: Any,
+        filter: Mapping[str, Any],
+        update: Union[Mapping[str, Any], List[Mapping[str, Any]]],
         upsert: bool = ...,
         collation: Optional[Any] = ...,
-        array_filters: Optional[Any] = ...,
+        array_filters: Optional[List[Mapping[str, Any]]] = ...,
         hint: Optional[Any] = ...,
     ) -> None: ...
 
-class UpdateMany(_UpdateOp):
+class UpdateMany:
     def __init__(
         self,
-        filter: Any,
-        update: Any,
+        filter: Mapping[str, Any],
+        update: Union[Mapping[str, Any], List[Mapping[str, Any]]],
         upsert: bool = ...,
         collation: Optional[Any] = ...,
-        array_filters: Optional[Any] = ...,
+        array_filters: Optional[List[Mapping[str, Any]]] = ...,
         hint: Optional[Any] = ...,
     ) -> None: ...
 
 class IndexModel:
-    def __init__(self, keys: Union[str, Sequence[Tuple[str, Union[int, str]]]], **kwargs: Any) -> None: ...
+    def __init__(self, keys: Union[str, Sequence[Tuple[str, Union[int, str, Mapping[str, Any]]]]], **kwargs: Any) -> None: ...
     @property
     def document(self) -> Dict[str, Any]: ...
