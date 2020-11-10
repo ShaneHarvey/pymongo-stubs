@@ -1,7 +1,8 @@
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Tuple, Union
 
 from bson.code import Code
 from bson.codec_options import CodecOptions
+from bson.raw_bson import RawBSONDocument
 from pymongo import common
 from pymongo.bulk import BulkOperationBuilder
 from pymongo.change_stream import CollectionChangeStream
@@ -124,7 +125,9 @@ class Collection(common.BaseObject):
         hint: Optional[_IndexKeyHint] = ...,
         session: Optional[ClientSession] = ...,
     ) -> DeleteResult: ...
-    def find_one(self, filter: Optional[Any] = ..., *args: Any, **kwargs: Any) -> Optional[Mapping[str, Any]]: ...
+    def find_one(
+        self, filter: Optional[Any] = ..., *args: Any, **kwargs: Any
+    ) -> Optional[Union[MutableMapping[str, Any], RawBSONDocument]]: ...
     def find(self, *args: Any, **kwargs: Any) -> Cursor: ...
     def find_raw_batches(self, *args: Any, **kwargs: Any) -> RawBatchCursor: ...
     def parallel_scan(self, num_cursors: int, session: Optional[ClientSession] = ..., **kwargs: Any) -> List[CommandCursor]: ...
